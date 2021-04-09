@@ -1,31 +1,47 @@
 package MergeSortedLists;
 
+import java.util.List;
+
+/**
+ * Solution to the Merge k Sorted Lists Problem
+ * https://leetcode.com/problems/merge-k-sorted-lists/
+ * 
+ * @author Karl Damus
+ * 
+ * runtime: 
+ */
 public class Solution {
 	
 	public static ListNode mergeKLists(ListNode[] lists) {
-        if (lists == null) { return new ListNode(); } // base case
+        if (lists == null) { return null; } 		// base case: empty
+		if (lists.length == 1) { return lists[0]; } // base case: 1 list (it's already sorted)
 
 		ListNode returnList = new ListNode();
 
-		// create one large list (loop through each list : lists)
+		// multiple lists
+		int[] arr = new int[getLengthOfAllLists(lists)];
+
 		for (int i = 0; i < lists.length; i++) {
-			ListNode tmpNode = lists[i];
-			printList(tmpNode);
-			
-			while (tmpNode != null) {
+			while (lists[i] != null) {
 				
-				if (returnList == null) { 
-					returnList = tmpNode; 
-				} else {
-					returnList.next = tmpNode;
-				}
-				
-				tmpNode = tmpNode.next; // increase tmpNode
 			}
 		}
 
 		return returnList;
     }
+
+	public static int getLengthOfAllLists(ListNode[] lists) {
+		int returnValue = 0;
+
+		for (int i = 0; i < lists.length; i++) {
+			while (lists[i] != null) {
+				returnValue += 1;
+				lists[i] = lists[i].next;
+			}
+		}
+
+		return returnValue;
+	}
 
 	public static void main(String[] args) {
 		ListNode list1 = new ListNode(1, new ListNode(4, new ListNode(5)));
@@ -36,11 +52,13 @@ public class Solution {
 			list1, list2, list3
 		};
 
-		// printList(mergeKLists(lists));
-		mergeKLists(lists);
-
+		printList(mergeKLists(lists));
 	}
 
+	/**
+	 * Helper function to print list
+	 * @param list the list to be printed
+	 */
 	public static void printList(ListNode list) {
 		ListNode tmp = list;
 		while (tmp != null) {
