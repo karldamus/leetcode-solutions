@@ -16,7 +16,7 @@ public class Solution {
 			returnArray[index += 1] = numberOfPointsInsideCircle;
 		}
 
-		return returnArray;
+		return returnArray; 
     }
 
 	public static boolean inRadius(int[] point, int[] circle) {
